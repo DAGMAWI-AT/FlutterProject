@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutterproject/screens/home/single_product.dart';
 
 class HomeScreen extends StatelessWidget {
-  // const HomeScreen({super.key});
-
   Widget _buildHerbsProduct(context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
