@@ -1,7 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:flutterproject/screens/home/single_product.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  // const HomeScreen({super.key});
+
+  Widget _buildHerbsProduct(context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Herbs Seasuogis'),
+              Text(
+                'View all',
+                style: TextStyle(color: Colors.grey),
+              ),
+            ],
+          ),
+        ),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              SingleProdduct(
+                  onTap: () {},
+                  productImage:
+                      'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
+                  productName: "Fresh baseil"),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
 
   Widget singleProducts() {
     return Container(
@@ -116,11 +150,115 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  Widget listTile({required IconData icon, required String title}) {
+    return ListTile(
+      leading: Icon(
+        icon,
+        size: 32,
+      ),
+      title: Text(
+        title,
+        style: TextStyle(color: Colors.black.withOpacity(0.45)),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffcbcbcb),
-      drawer: Drawer(),
+      drawer: Drawer(
+        child: Container(
+          color: Colors.green,
+          child: ListView(
+            children: [
+              DrawerHeader(
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Colors.white54,
+                      radius: 43,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.orange,
+                        radius: 40,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('welcome Dagu'),
+                        SizedBox(
+                          height: 7,
+                        ),
+                        Container(
+                          height: 30,
+                          child: OutlinedButton(
+                            onPressed: () {},
+                            child: Text('Login'),
+                            style: OutlinedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              side: BorderSide(width: 2),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              listTile(icon: Icons.home_outlined, title: "Home"),
+              listTile(icon: Icons.shop_outlined, title: "Cart"),
+              listTile(icon: Icons.person_outlined, title: "Profile"),
+              listTile(
+                  icon: Icons.notifications_outlined, title: "Notifcation"),
+              listTile(icon: Icons.star_outlined, title: "Rating"),
+              listTile(icon: Icons.favorite_outlined, title: "Wishlist"),
+              listTile(icon: Icons.copy_outlined, title: "Raise"),
+              listTile(icon: Icons.format_quote_outlined, title: "FAQs"),
+              Container(
+                height: 350,
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Contact Support"),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          Text("Call Us:"),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text("+251 985187059"),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      SingleChildScrollView(
+                        child: Row(
+                          children: [
+                            Text("Email Us:"),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text("amaredagmawi1@gmail.com"),
+                          ],
+                        ),
+                      ),
+                    ]),
+              )
+            ],
+          ),
+        ),
+      ),
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.grey),
         title: Text(
