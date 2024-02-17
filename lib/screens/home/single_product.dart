@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class SingleProdduct extends StatelessWidget {
   final String productImage;
   final String productName;
-  final Function? onTap; // Make it nullable
+  final Function? onTap;
   const SingleProdduct(
       {required this.productImage, required this.productName, this.onTap});
 
