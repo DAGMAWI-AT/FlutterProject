@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterproject/screens/home/home_screen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 
@@ -94,12 +95,13 @@ class _SignInState extends State<SignIn> {
                       Buttons.google,
                       text: "Sign up with Google",
                       onPressed: () async {
-                        User? signedInUser = await _googleSignUp();
-                        if (signedInUser != null) {
-                          setState(() {
-                            user = signedInUser;
-                          });
-                        }
+                        await _googleSignUp().then(
+                          (value) => Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => HomeScreen(),
+                            ),
+                          ),
+                        );
                       },
                     ),
                     SignInButton(

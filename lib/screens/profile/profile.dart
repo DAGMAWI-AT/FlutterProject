@@ -5,6 +5,21 @@ import 'package:flutterproject/config/colors.dart';
 import 'package:flutterproject/screens/home/drawer_side.dart';
 
 class Profile extends StatelessWidget {
+  Widget listTile({IconData? icon, required String title}) {
+    return Column(
+      children: [
+        Divider(
+          height: 1,
+        ),
+        ListTile(
+          leading: Icon(icon),
+          title: Text(title),
+          trailing: Icon(Icons.arrow_forward_ios),
+        )
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,12 +94,40 @@ class Profile extends StatelessWidget {
                                     backgroundColor: Color.fromARGB(
                                         255, 216, 212, 212), //scaffoldcollor
                                   ),
-                                )
+                                ),
                               ],
                             ),
-                          )
+                          ),
                         ],
-                      )
+                      ),
+                      listTile(
+                        icon: Icons.shop_outlined,
+                        title: 'My Orders',
+                      ),
+                      listTile(
+                        icon: Icons.location_on_outlined,
+                        title: 'My Location',
+                      ),
+                      listTile(
+                        icon: Icons.person_outlined,
+                        title: 'Reffer A Frinds',
+                      ),
+                      listTile(
+                        icon: Icons.file_copy_outlined,
+                        title: 'Terms & Condition',
+                      ),
+                      listTile(
+                        icon: Icons.policy_outlined,
+                        title: 'Private Policy',
+                      ),
+                      listTile(
+                        icon: Icons.add_chart,
+                        title: 'About',
+                      ),
+                      listTile(
+                        icon: Icons.exit_to_app_outlined,
+                        title: 'Log Out',
+                      ),
                     ],
                   ),
                 )

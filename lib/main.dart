@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         // scaffoldBackgroundColor: scaffoldBackgroundColor
       ),
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: SignIn(),
     );
   }
 }
