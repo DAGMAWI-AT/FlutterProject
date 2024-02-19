@@ -33,12 +33,12 @@ class SingleProdduct extends StatelessWidget {
                   ),
                 ),
               ),
-              Expanded(
-                flex: 2,
-                child: Image.network(
-                    fit: BoxFit.cover,
-                    'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG'),
-              ),
+              // Expanded(
+              //   flex: 2,
+              //   child: Image.network(
+              //       fit: BoxFit.cover,
+              //       'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG'),
+              // ),
               Expanded(
                 child: Padding(
                   padding:
@@ -47,7 +47,7 @@ class SingleProdduct extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Fresh vegitable',
+                        productName,
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold),
                       ),
