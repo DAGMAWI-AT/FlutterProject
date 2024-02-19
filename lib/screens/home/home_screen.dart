@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterproject/screens/home/drawer_side.dart';
 import 'package:flutterproject/screens/product_overview/product_overview.dart';
 import 'package:flutterproject/screens/home/single_product.dart';
+import 'package:flutterproject/screens/search/search.dart';
 
 class HomeScreen extends StatelessWidget {
   Widget _buildHerbsProduct(context) {
@@ -313,10 +314,19 @@ class HomeScreen extends StatelessWidget {
           CircleAvatar(
             radius: 15,
             backgroundColor: Color(0xffd4d181),
-            child: Icon(
-              Icons.search,
-              size: 17,
-              color: Colors.black,
+            child: IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => Search(),
+                  ),
+                );
+              },
+              icon: Icon(
+                Icons.search,
+                size: 17,
+                color: Colors.black,
+              ),
             ),
           ),
           Padding(

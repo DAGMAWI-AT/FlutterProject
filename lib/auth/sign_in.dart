@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterproject/config/colors.dart';
 import 'package:flutterproject/screens/home/home_screen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_button/sign_in_button.dart';
@@ -19,6 +20,7 @@ class _SignInState extends State<SignIn> {
         scopes: ['email'],
       );
       final FirebaseAuth _auth = FirebaseAuth.instance;
+      await _googleSignIn.signOut();
 
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser == null) return null;
@@ -43,7 +45,15 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Google SignIn"),
+        title: const Text(
+          "Dagu Platform",
+          style: TextStyle(
+            color: Colors.amber,
+          ),
+        ),
+        centerTitle: true, // Center the title horizontally
+
+        backgroundColor: Colors.green,
       ),
       body: user != null ? _userInfo() : _googleSignInButton(context),
     );
