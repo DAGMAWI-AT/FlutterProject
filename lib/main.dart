@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutterproject/auth/sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutterproject/config/colors.dart';
-import 'package:flutterproject/screens/home/home_screen.dart';
+// import 'package:flutterproject/screens/home/home_screen.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
