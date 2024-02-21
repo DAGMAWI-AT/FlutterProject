@@ -1,10 +1,22 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
+import 'package:flutterproject/providers/product_provider.dart';
 import 'package:flutterproject/screens/home/drawer_side.dart';
 import 'package:flutterproject/screens/product_overview/product_overview.dart';
 import 'package:flutterproject/screens/home/single_product.dart';
 import 'package:flutterproject/screens/search/search.dart';
+import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  ProductProvider productProvider = ProductProvider();
+  // Initialize your provider
+
   Widget _buildHerbsProduct(context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,53 +37,26 @@ class HomeScreen extends StatelessWidget {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: [
-              SingleProdduct(
+            children: productProvider.getHerbsProductDataList.map(
+              (herbsProductData) {
+                return GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => ProductOverview(
-                          productName: "Fresh baseil",
-                          productImage:
-                              'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
+                          productName: herbsProductData.productName,
+                          productImage: herbsProductData.productImage,
                         ),
                       ),
                     );
                   },
-                  productImage:
-                      'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
-                  productName: "Fresh baseil"),
-              SingleProdduct(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => ProductOverview(
-                          productName: "Fresh maint",
-                          productImage:
-                              'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
-                        ),
-                      ),
-                    );
-                  },
-                  productImage:
-                      'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
-                  productName: "Fresh maint"),
-              SingleProdduct(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => ProductOverview(
-                          productName: "Fresh baseil",
-                          productImage:
-                              'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
-                        ),
-                      ),
-                    );
-                  },
-                  productImage:
-                      'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
-                  productName: "Fresh baseil"),
-            ],
+                  child: SingleProdduct(
+                    productImage: herbsProductData.productImage,
+                    productName: herbsProductData.productName,
+                  ),
+                );
+              },
+            ).toList(),
           ),
         ),
       ],
@@ -172,13 +157,51 @@ class HomeScreen extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
-              singleProducts(),
-              singleProducts(),
-              singleProducts(),
-              singleProducts(),
-              singleProducts(),
-              singleProducts(),
-              singleProducts(),
+              SingleProdduct(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ProductOverview(
+                          productName: "Fresh vigtabel",
+                          productImage:
+                              'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
+                        ),
+                      ),
+                    );
+                  },
+                  productImage:
+                      'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
+                  productName: "Fresh vigtabel"),
+              SingleProdduct(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ProductOverview(
+                          productName: "Fresh vigtabel",
+                          productImage:
+                              'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
+                        ),
+                      ),
+                    );
+                  },
+                  productImage:
+                      'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
+                  productName: "Fresh vigtabel"),
+              SingleProdduct(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ProductOverview(
+                          productName: "Fresh vigtabel",
+                          productImage:
+                              'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
+                        ),
+                      ),
+                    );
+                  },
+                  productImage:
+                      'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
+                  productName: "Fresh vigtabel"),
             ],
           ),
         ),
@@ -186,121 +209,17 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget singleProducts() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 5),
-      height: 230,
-      width: 160,
-      decoration: BoxDecoration(
-          color: Color(0xffd9dad9), borderRadius: BorderRadius.circular(10)),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Expanded(
-          flex: 2,
-          child: Image.network(
-              fit: BoxFit.cover,
-              'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG'),
-        ),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Fresh vegitable',
-                  style: TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  '100 birr 1 kg',
-                  style: TextStyle(
-                    color: Colors.grey,
-                  ),
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: 25,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Row(children: [
-                          Expanded(
-                            child: Container(
-                              padding: EdgeInsets.only(right: 1),
-                              height: 30,
-                              width: 50,
-                              child: MaterialButton(
-                                child: Row(children: [
-                                  Expanded(
-                                      child: Text(
-                                    '1 KG',
-                                    style: TextStyle(fontSize: 10),
-                                  )),
-                                  Center(
-                                    child: Icon(
-                                      Icons.arrow_drop_down,
-                                      size: 10,
-                                      color: Colors.blue,
-                                    ),
-                                  )
-                                ]),
-                                onPressed: () {},
-                              ),
-                            ),
-                          ),
-                        ]),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Expanded(
-                      child: Container(
-                        height: 25,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.remove,
-                              size: 15,
-                              color: Colors.orange,
-                            ),
-                            Text(
-                              '1',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Icon(
-                              Icons.add,
-                              size: 15,
-                              color: Colors.orange,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
-        )
-      ]),
-    );
+  @override
+  void initState() {
+    super.initState();
+    productProvider = Provider.of(context, listen: false);
+    productProvider.fatchHerbsProductData();
   }
 
   @override
   Widget build(BuildContext context) {
+    ProductProvider productProvider = Provider.of(context);
+    // productProvider.fatchHerbsProductData();
     return Scaffold(
       backgroundColor: Color(0xffcbcbcb),
       drawer: DrawerSide(),
