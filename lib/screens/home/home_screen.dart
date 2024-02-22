@@ -44,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => ProductOverview(
+                          productPrice: herbsProductData.productPrice,
                           productName: herbsProductData.productName,
                           productImage: herbsProductData.productImage,
                         ),
@@ -51,6 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   },
                   child: SingleProdduct(
+                    productPrice: herbsProductData.productPrice,
                     productImage: herbsProductData.productImage,
                     productName: herbsProductData.productName,
                   ),
@@ -72,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('fresh  vigitable'),
+              Text('Fresh  vigitable'),
               Text(
                 'View all',
                 style: TextStyle(color: Colors.grey),
@@ -83,53 +85,28 @@ class _HomeScreenState extends State<HomeScreen> {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: [
-              SingleProdduct(
+            children: productProvider.getFreshProductDataList.map(
+              (freshProductData) {
+                return GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => ProductOverview(
-                          productName: "Fresh vigtabel",
-                          productImage:
-                              'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
+                          productPrice: freshProductData.productPrice,
+                          productName: freshProductData.productName,
+                          productImage: freshProductData.productImage,
                         ),
                       ),
                     );
                   },
-                  productImage:
-                      'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
-                  productName: "Fresh vigtabel"),
-              SingleProdduct(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => ProductOverview(
-                          productName: "Fresh slalad",
-                          productImage:
-                              'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
-                        ),
-                      ),
-                    );
-                  },
-                  productImage:
-                      'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
-                  productName: "Fresh slalad"),
-              SingleProdduct(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => ProductOverview(
-                          productName: "Fresh friut",
-                          productImage:
-                              'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
-                        ),
-                      ),
-                    );
-                  },
-                  productImage:
-                      'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
-                  productName: "Fresh friut"),
-            ],
+                  child: SingleProdduct(
+                    productPrice: freshProductData.productPrice,
+                    productImage: freshProductData.productImage,
+                    productName: freshProductData.productName,
+                  ),
+                );
+              },
+            ).toList(),
           ),
         ),
       ],
@@ -162,6 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => ProductOverview(
+                          productPrice: 60,
                           productName: "Fresh vigtabel",
                           productImage:
                               'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
@@ -169,6 +147,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   },
+                  productPrice: 60,
                   productImage:
                       'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
                   productName: "Fresh vigtabel"),
@@ -177,6 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => ProductOverview(
+                          productPrice: 60,
                           productName: "Fresh vigtabel",
                           productImage:
                               'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
@@ -184,6 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   },
+                  productPrice: 60,
                   productImage:
                       'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
                   productName: "Fresh vigtabel"),
@@ -192,6 +173,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => ProductOverview(
+                          productPrice: 60,
                           productName: "Fresh vigtabel",
                           productImage:
                               'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
@@ -199,6 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   },
+                  productPrice: 60,
                   productImage:
                       'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
                   productName: "Fresh vigtabel"),
@@ -214,12 +197,15 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     productProvider = Provider.of(context, listen: false);
     productProvider.fatchHerbsProductData();
+    productProvider.fatchFreshProductData();
   }
 
   @override
   Widget build(BuildContext context) {
     ProductProvider productProvider = Provider.of(context);
     // productProvider.fatchHerbsProductData();
+    // productProvider.fatchFreshProductData();
+
     return Scaffold(
       backgroundColor: Color(0xffcbcbcb),
       drawer: DrawerSide(),

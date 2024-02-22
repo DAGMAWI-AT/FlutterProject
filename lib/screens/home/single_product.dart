@@ -4,8 +4,12 @@ class SingleProdduct extends StatelessWidget {
   final String productImage;
   final String productName;
   final Function? onTap;
+  final int productPrice;
   const SingleProdduct(
-      {required this.productImage, required this.productName, this.onTap});
+      {required this.productImage,
+      required this.productName,
+      this.onTap,
+      required this.productPrice});
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +56,7 @@ class SingleProdduct extends StatelessWidget {
                             color: Colors.black, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        '100 birr 1 kg',
+                        '$productPrice birr',
                         style: TextStyle(
                           color: Colors.grey,
                         ),

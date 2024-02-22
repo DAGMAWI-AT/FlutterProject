@@ -8,7 +8,11 @@ class ProductOverview extends StatefulWidget {
   // const ProductOverview({super.key});
   final String productName;
   final String productImage;
-  ProductOverview({required this.productImage, required this.productName});
+  final int productPrice;
+  ProductOverview(
+      {required this.productImage,
+      required this.productName,
+      required this.productPrice});
 
   @override
   _ProductOverviewState createState() => _ProductOverviewState();
@@ -130,7 +134,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                             ),
                           ],
                         ),
-                        Text("\50 birr"),
+                        Text("\ ${widget.productPrice} Birr"),
                         Container(
                           padding: EdgeInsets.symmetric(
                             horizontal: 30,
