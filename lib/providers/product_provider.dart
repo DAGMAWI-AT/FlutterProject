@@ -3,7 +3,22 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutterproject/models/product_model.dart';
 
 class ProductProvider with ChangeNotifier {
-  //////herbs product/////////
+  // Single instance of ProductModel
+  ProductModel? productModel;
+
+  void productModels(QueryDocumentSnapshot element) {
+    // Update the existing instance with new data
+    productModel = ProductModel(
+      productImage: element.get('productImage') ?? '',
+      productName: element.get('productName') ?? '',
+      productPrice: element.get('productPrice') ?? 0,
+    );
+
+    // Add the single instance to both lists
+    herbsProductList.add(productModel!);
+    freshProductList.add(productModel!);
+  }
+
   List<ProductModel> herbsProductList = [];
 
   Future<void> fatchHerbsProductData() async {
@@ -15,27 +30,21 @@ class ProductProvider with ChangeNotifier {
       value.docs.forEach(
         (element) {
           print(element.data());
-          ProductModel productModel = ProductModel(
-            productImage: element.get('productImage') ?? '',
-            productName: element.get('productName') ?? '',
-            productPrice: element.get('productPrice') ?? 0,
-          );
-          newList.add(productModel);
+          productModels(element);
+          newList.add(productModel!);
         },
       );
 
       herbsProductList = newList;
       notifyListeners();
     } catch (error) {
-      print('Error fetching data: $error');
+      print('Error fetching herbs data: $error');
     }
   }
 
   List<ProductModel> get getHerbsProductDataList {
     return herbsProductList;
   }
-
-  /////// fresh product///////
 
   List<ProductModel> freshProductList = [];
 
@@ -48,19 +57,15 @@ class ProductProvider with ChangeNotifier {
       value.docs.forEach(
         (element) {
           print(element.data());
-          ProductModel productModel = ProductModel(
-            productImage: element.get('productImage') ?? '',
-            productName: element.get('productName') ?? '',
-            productPrice: element.get('productPrice') ?? 0,
-          );
-          newList.add(productModel);
+          productModels(element);
+          newList.add(productModel!);
         },
       );
 
       freshProductList = newList;
       notifyListeners();
     } catch (error) {
-      print('Error fetching data: $error');
+      print('Error fetching fresh data: $error');
     }
   }
 

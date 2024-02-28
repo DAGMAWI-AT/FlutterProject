@@ -27,9 +27,20 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('Herbs Seasuogis'),
-              Text(
-                'View all',
-                style: TextStyle(color: Colors.grey),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => Search(
+                        search: productProvider.getHerbsProductDataList,
+                      ),
+                    ),
+                  );
+                },
+                child: Text(
+                  'View all',
+                  style: TextStyle(color: Colors.grey),
+                ),
               ),
             ],
           ),
@@ -223,7 +234,9 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => Search(),
+                    builder: (context) => Search(
+                      search: [],
+                    ),
                   ),
                 );
               },

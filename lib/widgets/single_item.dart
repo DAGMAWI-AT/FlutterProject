@@ -3,7 +3,13 @@ import 'package:flutterproject/config/colors.dart';
 
 class SingleItem extends StatelessWidget {
   bool? isBool = false;
-  SingleItem({this.isBool});
+
+  String? productImage;
+  String? productName;
+  int? productPrice;
+  SingleItem(
+      {this.isBool, this.productImage, this.productName, this.productPrice});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -15,10 +21,7 @@ class SingleItem extends StatelessWidget {
               Expanded(
                 child: Container(
                   height: 90,
-                  child: Center(
-                    child: Image.network(
-                        'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG'),
-                  ),
+                  child: Center(child: Image.network(productImage!)),
                 ),
               ),
               SizedBox(
@@ -36,12 +39,12 @@ class SingleItem extends StatelessWidget {
                       Column(
                         children: [
                           Text(
-                            "ProsuctName",
+                            productName!,
                             style: TextStyle(
                                 color: textColor, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            "50 birr",
+                            "$productPrice\ Birr",
                             style: TextStyle(color: Colors.grey, fontSize: 14),
                           ),
                         ],

@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutterproject/models/product_model.dart';
 import 'package:flutterproject/widgets/single_item.dart';
 
-class Search extends StatelessWidget {
-  const Search({super.key});
+enum SinginCharacter { lowToHigh, highToLow, alphabetically }
+
+class Search extends StatefulWidget {
+  final List<ProductModel> search;
+  Search({required this.search});
+
+  @override
+  State<Search> createState() => _SearchState();
+}
+
+class _SearchState extends State<Search> {
+  SinginCharacter _character = SinginCharacter.alphabetically;
 
   @override
   Widget build(BuildContext context) {
@@ -37,24 +48,16 @@ class Search extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          SingleItem(
-            isBool: false,
-          ),
-          SingleItem(
-            isBool: false,
-          ),
-          SingleItem(
-            isBool: false,
-          ),
-          SingleItem(
-            isBool: false,
-          ),
-          SingleItem(
-            isBool: false,
-          ),
-          SingleItem(
-            isBool: false,
-          ),
+          Column(
+            children: widget.search.map((data) {
+              return SingleItem(
+                isBool: false,
+                productImage: data.productImage,
+                productName: data.productName,
+                productPrice: data.productPrice,
+              );
+            }).toList(),
+          )
         ],
       ),
     );
