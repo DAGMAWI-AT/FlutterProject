@@ -5,6 +5,7 @@ import 'package:flutterproject/models/product_model.dart';
 class ProductProvider with ChangeNotifier {
   // Single instance of ProductModel
   ProductModel? productModel;
+  List<ProductModel> search = [];
 
   void productModels(QueryDocumentSnapshot element) {
     // Update the existing instance with new data
@@ -15,8 +16,9 @@ class ProductProvider with ChangeNotifier {
     );
 
     // Add the single instance to both lists
-    herbsProductList.add(productModel!);
-    freshProductList.add(productModel!);
+    // herbsProductList.add(productModel!);
+    // freshProductList.add(productModel!);
+    search.add(productModel!);
   }
 
   List<ProductModel> herbsProductList = [];
@@ -71,5 +73,11 @@ class ProductProvider with ChangeNotifier {
 
   List<ProductModel> get getFreshProductDataList {
     return freshProductList;
+  }
+
+  /////////////////search return////////////
+
+  List<ProductModel> get getAllProductSeacrch {
+    return search;
   }
 }

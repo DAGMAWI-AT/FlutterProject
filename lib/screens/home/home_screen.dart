@@ -86,9 +86,20 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('Fresh  vigitable'),
-              Text(
-                'View all',
-                style: TextStyle(color: Colors.grey),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => Search(
+                        search: productProvider.getFreshProductDataList,
+                      ),
+                    ),
+                  );
+                },
+                child: Text(
+                  'View all',
+                  style: TextStyle(color: Colors.grey),
+                ),
               ),
             ],
           ),
@@ -235,7 +246,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => Search(
-                      search: [],
+                      search: productProvider.getAllProductSeacrch,
                     ),
                   ),
                 );
