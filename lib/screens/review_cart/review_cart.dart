@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutterproject/config/colors.dart';
+import 'package:flutterproject/models/review_cart_model.dart';
+import 'package:flutterproject/providers/review_cart_provider.dart';
 import 'package:flutterproject/widgets/single_item.dart';
+import 'package:provider/provider.dart';
 
 class ReviewCart extends StatelessWidget {
   const ReviewCart({super.key});
 
   @override
   Widget build(BuildContext context) {
+    ReviewCartProvider reviewCartProvider = Provider.of(context);
+    reviewCartProvider.getReviewCartData();
     return Scaffold(
       bottomNavigationBar: ListTile(
         title: Text("Total Amount"),
@@ -35,34 +40,27 @@ class ReviewCart extends StatelessWidget {
         ),
         backgroundColor: primaryColor,
       ),
-      body: ListView(
-        children: [
-          SizedBox(
-            height: 10,
-          ),
-          SingleItem(
-            isBool: true,
-          ),
-          SingleItem(
-            isBool: true,
-          ),
-          SingleItem(),
-          SingleItem(
-            isBool: true,
-          ),
-          SingleItem(
-            isBool: true,
-          ),
-          SingleItem(
-            isBool: true,
-          ),
-          SingleItem(
-            isBool: false,
-          ),
-          SizedBox(
-            height: 10,
-          )
-        ],
+      body: ListView.builder(
+        itemCount: reviewCartProvider.getReviewCartDataList.length,
+        itemBuilder: (context, index) {
+          ReviewCartModel data =
+              reviewCartProvider.getReviewCartDataList[index];
+          return Column(
+            children: [
+              SizedBox(
+                height: 10,
+              ),
+              SingleItem(
+                isBool: true,
+                productImage: data.cartImage,
+                productName: data.cartName,
+                productPrice: data.cartPrice,
+                productQuantity: data.cartQuantity,
+                productId: data.cartId,
+              ),
+            ],
+          );
+        },
       ),
     );
   }

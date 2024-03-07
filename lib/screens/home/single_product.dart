@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutterproject/widgets/counte.dart';
 
 class SingleProdduct extends StatelessWidget {
   final String productImage;
   final String productName;
   final Function? onTap;
   final int productPrice;
+  final String productId;
+
   const SingleProdduct(
-      {required this.productImage,
+      {required this.productId,
+      required this.productImage,
       required this.productName,
       this.onTap,
       required this.productPrice});
@@ -102,37 +106,47 @@ class SingleProdduct extends StatelessWidget {
                           SizedBox(
                             width: 5,
                           ),
-                          Expanded(
-                            child: Container(
-                              height: 25,
-                              width: 50,
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.remove,
-                                    size: 15,
-                                    color: Colors.orange,
-                                  ),
-                                  Text(
-                                    '1',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Icon(
-                                    Icons.add,
-                                    size: 15,
-                                    color: Colors.orange,
-                                  )
-                                ],
-                              ),
-                            ),
+                          Count(
+                            productId: productId,
+                            productImage: productImage,
+                            productName: productName,
+                            productPrice: productPrice,
+                            productQuantity: 1,
                           ),
+                          // Expanded(
+                          //   child: Container(
+                          //     height: 25,
+                          //     width: 50,
+                          //     decoration: BoxDecoration(
+                          //       border: Border.all(color: Colors.grey),
+                          //       borderRadius: BorderRadius.circular(8),
+                          //     ),
+                          //     child: Row(
+                          //       mainAxisAlignment: MainAxisAlignment.center,
+                          //       children: [
+                          //         Icon(
+                          //           Icons.remove,
+                          //           size: 15,
+                          //           color: Colors.orange,
+                          //         ),
+                          //         Text(
+                          //           '1',
+                          //           style: TextStyle(
+                          //               color: Colors.black,
+                          //               fontWeight: FontWeight.bold),
+                          //         ),
+                          //         Icon(
+                          //           Icons.add,
+                          //           size: 15,
+                          //           color: Colors.orange,
+                          //         )
+                          //       ],
+                          //     ),
+                          //   ),
+                          // ),
+                          // SizedBox(
+                          //   width: 5,
+                          // ),
                         ],
                       )
                     ],

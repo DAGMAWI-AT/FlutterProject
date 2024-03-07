@@ -7,8 +7,16 @@ class SingleItem extends StatelessWidget {
   String? productImage;
   String? productName;
   int? productPrice;
+  int? productQuantity;
+  String? productId;
+
   SingleItem(
-      {this.isBool, this.productImage, this.productName, this.productPrice});
+      {this.isBool,
+      this.productQuantity,
+      this.productId,
+      this.productImage,
+      this.productName,
+      this.productPrice});
 
   @override
   Widget build(BuildContext context) {

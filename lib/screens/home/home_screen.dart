@@ -63,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   },
                   child: SingleProdduct(
+                    productId: herbsProductData.productId,
                     productPrice: herbsProductData.productPrice,
                     productImage: herbsProductData.productImage,
                     productName: herbsProductData.productName,
@@ -122,6 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   },
                   child: SingleProdduct(
+                    productId: freshProductData.productId,
                     productPrice: freshProductData.productPrice,
                     productImage: freshProductData.productImage,
                     productName: freshProductData.productName,
@@ -169,6 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   },
+                  productId: "dag",
                   productPrice: 60,
                   productImage:
                       'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
@@ -186,6 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   },
+                  productId: "dag1",
                   productPrice: 60,
                   productImage:
                       'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',
@@ -203,6 +207,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   },
+                  productId: "dag2",
                   productPrice: 60,
                   productImage:
                       'https://upload.wikimedia.org/wikipedia/commons/4/42/Vegetables_0006.JPG',

@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterproject/config/colors.dart';
+import 'package:flutterproject/providers/user_provider.dart';
 import 'package:flutterproject/screens/home/home_screen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 
 class SignIn extends StatefulWidget {
@@ -11,8 +13,15 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  UserProvider? userProvider;
   User? user;
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    userProvider = Provider.of<UserProvider>(context, listen: false);
+  }
 
   Future<User?> _googleSignUp() async {
     try {
@@ -34,6 +43,20 @@ class _SignInState extends State<SignIn> {
       );
 
       final User user = (await _auth.signInWithCredential(credential)).user!;
+
+      if (user != null && userProvider != null) {
+        String displayName = user.displayName ?? 'DefaultName';
+        String photoURL = user.photoURL ?? 'DefaultURL';
+        String userEmail = user.email ?? 'DefaultEmail';
+
+        userProvider!.addUserData(
+          currentUser: user,
+          userName: displayName,
+          userImage: photoURL,
+          userEmail: userEmail,
+        );
+      }
+
       return user;
     } catch (e) {
       print(e.toString());
@@ -43,6 +66,7 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
+    userProvider = Provider.of<UserProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: const Text(

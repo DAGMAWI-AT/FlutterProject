@@ -13,6 +13,7 @@ class ProductProvider with ChangeNotifier {
       productImage: element.get('productImage') ?? '',
       productName: element.get('productName') ?? '',
       productPrice: element.get('productPrice') ?? 0,
+      productId: element.get('productId') ?? '',
     );
 
     // Add the single instance to both lists
