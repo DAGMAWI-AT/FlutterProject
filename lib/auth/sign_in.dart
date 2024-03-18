@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterproject/config/colors.dart';
+// import 'package:flutterproject/config/colors.dart';
 import 'package:flutterproject/providers/user_provider.dart';
 import 'package:flutterproject/screens/home/home_screen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -44,6 +44,7 @@ class _SignInState extends State<SignIn> {
 
       final User user = (await _auth.signInWithCredential(credential)).user!;
 
+      // ignore: unnecessary_null_comparison
       if (user != null && userProvider != null) {
         String displayName = user.displayName ?? 'DefaultName';
         String photoURL = user.photoURL ?? 'DefaultURL';

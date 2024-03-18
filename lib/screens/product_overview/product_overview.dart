@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterproject/config/colors.dart';
+// import 'package:flutterproject/config/colors.dart';
 
 enum SinginCharacter { fill, outline }
 
@@ -19,6 +19,7 @@ class ProductOverview extends StatefulWidget {
 }
 
 class _ProductOverviewState extends State<ProductOverview> {
+  // ignore: unused_field
   SinginCharacter _character = SinginCharacter.fill;
 
   Widget bottomNavigatorBar({
