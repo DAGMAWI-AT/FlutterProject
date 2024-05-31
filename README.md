@@ -1,5 +1,5 @@
 # flutterproject
-
+email:amaredagmawi1@gmail.com
 A new Flutter project.
 
 ## Getting Started
