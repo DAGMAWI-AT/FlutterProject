@@ -7,6 +7,7 @@ import 'package:flutterproject/config/colors.dart';
 import 'package:flutterproject/providers/product_provider.dart';
 import 'package:flutterproject/providers/review_cart_provider.dart';
 import 'package:flutterproject/providers/user_provider.dart';
+import 'package:flutterproject/providers/wish_list_provider.dart';
 // import 'package:flutterproject/screens/home/home_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -30,6 +31,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<ReviewCartProvider>(
           create: (context) => ReviewCartProvider(),
+        ),
+        ChangeNotifierProvider<WishListProvider>(
+          create: (context) => WishListProvider(),
         ),
       ],
       child: MaterialApp(

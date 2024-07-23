@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterproject/providers/wish_list_provider.dart';
+import 'package:provider/provider.dart';
 // import 'package:flutterproject/config/colors.dart';
 
 enum SinginCharacter { fill, outline }
@@ -9,10 +11,11 @@ class ProductOverview extends StatefulWidget {
   final String productName;
   final String productImage;
   final int productPrice;
-  ProductOverview(
-      {required this.productImage,
-      required this.productName,
-      required this.productPrice});
+  ProductOverview({
+    required this.productImage,
+    required this.productName,
+    required this.productPrice,
+  });
 
   @override
   _ProductOverviewState createState() => _ProductOverviewState();
@@ -23,53 +26,71 @@ class _ProductOverviewState extends State<ProductOverview> {
   SinginCharacter _character = SinginCharacter.fill;
 
   Widget bottomNavigatorBar({
-    Color iconColor = Colors.black45,
-    Color backgroundColor = Colors.green,
+    Color iconColor = const Color.fromARGB(255, 0, 0, 0),
+    Color backgroundColor = const Color.fromARGB(255, 248, 172, 8),
     Color color = Colors.black87,
     String title = "overview",
     IconData iconData = Icons.favorite_outline,
+    required Function() onTap,
   }) {
     return Expanded(
-      child: Container(
-        padding: EdgeInsets.all(20),
-        color: backgroundColor,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              iconData,
-              size: 17,
-              color: iconColor,
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            Text(
-              title,
-              style: TextStyle(color: Colors.black45),
-            ),
-          ],
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: EdgeInsets.all(20),
+          color: backgroundColor,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                iconData,
+                size: 20,
+                color: iconColor,
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text(
+                title,
+                style: TextStyle(color: Colors.black45),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
+  bool wishListBool = false;
   @override
   Widget build(BuildContext context) {
+    WishListProvider wishListProvider = Provider.of(context);
     return Scaffold(
         bottomNavigationBar: Row(children: [
           bottomNavigatorBar(
-              backgroundColor: Colors.black45,
-              color: Colors.white70,
-              iconColor: Colors.grey,
-              title: "add to whislist",
-              iconData: Icons.favorite_outline),
+            backgroundColor: Colors.orange,
+            color: Color.fromARGB(255, 5, 3, 0),
+            iconColor: Colors.black,
+            title: "add to whislist",
+            iconData:
+                wishListBool == false ? Icons.favorite_outline : Icons.favorite,
+            onTap: () {
+              setState(() {
+                wishListBool = !wishListBool;
+              });
+            },
+          ),
           bottomNavigatorBar(
             backgroundColor: Colors.green,
             color: Colors.white70,
             iconColor: Colors.grey,
             title: "go to chart",
             iconData: Icons.shop_outlined,
+            onTap: () {
+              setState(() {
+                wishListBool = !wishListBool;
+              });
+            },
           ),
         ]),
         appBar: AppBar(

@@ -25,17 +25,15 @@ class Count extends StatefulWidget {
 }
 
 class _CountState extends State<Count> {
-  // late int count;
-  int count = 0;
-
+  late int count;
   bool isTrue = false;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   count = widget.productQuantity;
-  //   getAddAndQuantity();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    count = widget.productQuantity;
+    getAddAndQuantity();
+  }
 
   void getAddAndQuantity() {
     FirebaseFirestore.instance
@@ -88,7 +86,7 @@ class _CountState extends State<Count> {
                           cartQuantity: count);
                     } else if (count == 1) {
                       setState(() {
-                        // count = 0;
+                        count = 0;
                         isTrue = false;
                       });
                       reviewCartProvider.reviewCartDateDelete(widget.productId);
@@ -131,7 +129,7 @@ class _CountState extends State<Count> {
                 onTap: () {
                   setState(() {
                     isTrue = true;
-                    // count = 1; // Set count to 1 when adding the item
+                    count = 1; // Set count to 1 when adding the item
                   });
                   reviewCartProvider.addReviewCartData(
                     cartId: widget.productId,
