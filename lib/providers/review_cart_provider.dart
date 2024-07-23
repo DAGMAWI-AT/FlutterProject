@@ -50,7 +50,7 @@ class ReviewCartProvider with ChangeNotifier {
       newList.add(reviewCartModel);
     });
     reviewCartDataList = newList;
-    
+
     notifyListeners();
   }
 
