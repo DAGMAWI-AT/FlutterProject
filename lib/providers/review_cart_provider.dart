@@ -24,10 +24,42 @@ class ReviewCartProvider with ChangeNotifier {
           "cartImage": cartImage,
           "cartPrice": cartPrice,
           "cartQuantity": cartQuantity,
+          "isAdd": true,
         },
       );
     } catch (error) {
       print("Error adding user data: $error");
+      // Handle the error as needed, e.g., show an error message to the user.
+    }
+  }
+
+  ///////update//////////////////
+
+  void updateReviewCartData({
+    required String cartId,
+    required String cartName,
+    required String cartImage,
+    required int cartPrice,
+    required int cartQuantity,
+  }) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection("ReviewCart")
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection("YourReviewCart")
+          .doc(cartId)
+          .update(
+        {
+          "cartId": cartId,
+          "cartName": cartName,
+          "cartImage": cartImage,
+          "cartPrice": cartPrice,
+          "cartQuantity": cartQuantity,
+          "isAdd": true,
+        },
+      );
+    } catch (error) {
+      print("Error update user data: $error");
       // Handle the error as needed, e.g., show an error message to the user.
     }
   }
@@ -56,5 +88,18 @@ class ReviewCartProvider with ChangeNotifier {
 
   List<ReviewCartModel> get getReviewCartDataList {
     return reviewCartDataList;
+  }
+
+  ///////////////////////////////delate cart/////////
+  ///
+
+  reviewCartDateDelete(cartId) {
+    FirebaseFirestore.instance
+        .collection("ReviewCart")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection("YourReviewCart")
+        .doc(cartId)
+        .delete();
+    notifyListeners();
   }
 }

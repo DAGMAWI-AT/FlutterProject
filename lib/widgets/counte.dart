@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterproject/config/colors.dart';
 import 'package:flutterproject/providers/review_cart_provider.dart';
@@ -23,8 +25,41 @@ class Count extends StatefulWidget {
 }
 
 class _CountState extends State<Count> {
-  int count = 1;
+  // late int count;
+  int count = 0;
+
   bool isTrue = false;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   count = widget.productQuantity;
+  //   getAddAndQuantity();
+  // }
+
+  void getAddAndQuantity() {
+    FirebaseFirestore.instance
+        .collection("ReviewCart")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection("yourReviewCart")
+        .doc(widget.productId)
+        .get()
+        .then(
+          (value) => {
+            if (this.mounted)
+              {
+                if (value.exists)
+                  {
+                    setState(() {
+                      isTrue = value.get("isAdd");
+                      count = value.get("cartQuantity");
+                    })
+                  }
+              }
+          },
+        );
+  }
+
   @override
   Widget build(BuildContext context) {
     ReviewCartProvider reviewCartProvider = Provider.of(context);
@@ -45,11 +80,18 @@ class _CountState extends State<Count> {
                       setState(() {
                         count--;
                       });
-                    }
-                    if (count == 1) {
+                      reviewCartProvider.updateReviewCartData(
+                          cartId: widget.productId,
+                          cartName: widget.productName,
+                          cartImage: widget.productImage,
+                          cartPrice: widget.productPrice,
+                          cartQuantity: count);
+                    } else if (count == 1) {
                       setState(() {
+                        // count = 0;
                         isTrue = false;
                       });
+                      reviewCartProvider.reviewCartDateDelete(widget.productId);
                     }
                   },
                   child: Icon(
@@ -66,9 +108,15 @@ class _CountState extends State<Count> {
                 InkWell(
                   onTap: () {
                     setState(() {
-                      // isTrue = false;
                       count++;
                     });
+
+                    reviewCartProvider.updateReviewCartData(
+                        cartId: widget.productId,
+                        cartName: widget.productName,
+                        cartImage: widget.productImage,
+                        cartPrice: widget.productPrice,
+                        cartQuantity: count);
                   },
                   child: Icon(
                     Icons.add,
@@ -83,6 +131,7 @@ class _CountState extends State<Count> {
                 onTap: () {
                   setState(() {
                     isTrue = true;
+                    // count = 1; // Set count to 1 when adding the item
                   });
                   reviewCartProvider.addReviewCartData(
                     cartId: widget.productId,
